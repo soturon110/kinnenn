@@ -286,3 +286,102 @@ h5 {
       background-color: #4CAF50; /* アクティブ時の色変更 */
       transform: scale(1.05); /* アクティブ時に少し大きく */
     }
+
+    @media screen and (max-width: 768px) {
+      /* 全体のレイアウト調整 */
+      .wrapper {
+        max-width: 100%; /* スマホ画面幅にフィット */
+        padding: 0 10px; /* サイドに余白を追加 */
+      }
+    
+      #header {
+        font-size: 20px; /* 見出しのフォントサイズを縮小 */
+        margin: 1rem 0; /* 上下の余白を調整 */
+      }
+    
+      h2, h5 {
+        font-size: 16px; /* 見出しのサイズを調整 */
+        line-height: 1.4;
+      }
+    
+      /* 入力要素とボタン */
+      input, select, button {
+        width: 100%; /* 幅を画面いっぱいに */
+        margin-bottom: 15px; /* 下部に余白を追加 */
+        padding: 10px; /* タップしやすいサイズに調整 */
+        font-size: 14px;
+      }
+    
+      #goal-achieve-button, #save-oxygen, #save, #add-tip-btn {
+        padding: 10px 15px; /* タップしやすい大きさ */
+        font-size: 14px; /* ボタンのフォントサイズを縮小 */
+      }
+    
+      /* カレンダー */
+      #calendar {
+        font-size: 12px; /* カレンダー内の文字サイズを縮小 */
+      }
+    
+      table {
+        font-size: 12px; /* テーブル内のフォントサイズ調整 */
+      }
+    
+      /* カレンダーの日付セル */
+      td, th {
+        padding: 8px; /* セル内の余白を縮小 */
+      }
+    
+      /* モーダル */
+      .modal-content {
+        width: 90%; /* モーダルの幅を調整 */
+        padding: 20px;
+        font-size: 14px;
+      }
+    
+      /* グラフ */
+      canvas {
+        width: 100%; /* 幅を画面いっぱいに */
+        height: auto; /* 高さを自動調整 */
+      }
+    
+      /* ナビゲーションボタン */
+      #next-prev-button button {
+        width: 48%; /* ボタンを横並びで半分にする */
+        padding: 10px;
+        font-size: 14px;
+      }
+    
+      #prev, #next {
+        float: none; /* 浮動解除 */
+        margin: 0; /* マージン調整 */
+      }
+    
+      /* 喫煙データリスト */
+      .smoking-entry {
+        flex-direction: column; /* 縦に並べる */
+        align-items: flex-start; /* 左揃え */
+        font-size: 14px; /* フォントサイズ縮小 */
+      }
+    
+      .entry-details {
+        margin-bottom: 10px; /* 要素間に余白を追加 */
+      }
+    
+      .delete-btn {
+        padding: 8px 12px; /* ボタンを小さく */
+      }
+    
+      /* カテゴリーボタン */
+      .category-btn {
+        width: 100%; /* ボタン幅を画面いっぱいに */
+        margin: 10px 0; /* ボタン間の余白を調整 */
+        font-size: 14px; /* フォントサイズ調整 */
+        padding: 10px 15px; /* タップしやすいサイズ */
+      }
+    
+      /* 戻るボタン */
+      #backtop-button, #back-button {
+        padding: 10px; /* ボタンサイズ調整 */
+        font-size: 14px; /* フォントサイズ調整 */
+      }
+    }
