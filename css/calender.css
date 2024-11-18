@@ -1,0 +1,288 @@
+@charset "utf-8";@charset "utf-8";
+/*全体*/
+.wrapper{
+  max-width: 600px;
+  margin: 0 auto;
+  color: #666;
+}
+#header {
+  text-align: center;
+  font-size: 24px;
+  width: 100%;
+  margin: 1rem 0 0;
+}
+input {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 1em 0;
+  padding: .8em;
+  border-radius: 2em;
+  border: 2px solid #aaa;
+  font-weight: bold;
+}
+
+/*カレンダー*/
+#calendar {
+  text-align: center;
+  width: 100%;
+}
+table {
+  outline: 2px solid #ddd;
+  border-collapse: collapse;
+  width: 100%;
+}
+th {
+  color: #000;
+}
+th, td {
+  outline: 1px solid #ddd;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+/*日曜日*/
+td:first-child {
+  color: red;
+}
+/*土曜日*/
+td:last-child {
+  color: blue;
+}
+/*前後月の日付*/
+td.disabled {
+  color: #ccc;
+}
+/*本日*/
+td.today {
+  background-color: #D65E72;
+  color: #fff;
+}
+
+/*ボタン*/
+#next-prev-button {
+  position: relative;
+}
+#next-prev-button button{
+  cursor: pointer;
+  background: #5570aa;
+  color: #fff;
+  border: 1px solid #5570aa;
+  border-radius: 4px;
+  font-size: 1rem;
+  padding: 0.5rem 2rem;
+  margin: 1rem 0;
+}
+#next-prev-button button:hover{
+  background-color: #959ecf;
+  border-color: #959ecf;
+}
+#prev {
+  float: left;
+}
+#next {
+  float: right;
+}
+
+
+  /* 喫煙データのリストスタイル */
+.smoking-entry {
+  background-color: #f9f9f9; /* 背景色 */
+  border: 1px solid #ddd; /* 境界線 */
+  padding: 10px; /* 内側の余白 */
+  margin-bottom: 8px; /* 各エントリの間隔 */
+  border-radius: 5px; /* 角丸 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+  /* データの詳細スタイル */
+.entry-details {
+  display: flex;
+  align-items: center;
+}
+
+.entry-details .icon {
+  font-size: 1.2em; /* アイコンサイズを大きく */
+  margin-right: 4px; /* アイコンとテキストの間隔 */
+}
+
+  /* 本数、時間、状況の強調 */
+.entry-details strong {
+  font-size: 1.1em; /* テキストサイズ */
+  color: #333; /* 文字色 */
+}
+
+  /* 削除ボタンスタイル */
+.delete-btn {
+  background-color: #e74c3c; /* 削除ボタンの背景色 */
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.2s ease;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b; /* ホバー時の色 */
+}
+
+/* モーダル */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.oxygen-section {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#oxygen-chart {
+  margin-top: 20px;
+}
+
+h2 {
+  color: #5a5a5a;
+}
+
+h5 {
+  color: #7c7b7b;
+}
+
+
+  /* ボタンの共通スタイル */
+#goal-achieve-button, #save-oxygen, #save, #add-tip-btn {
+  background-color: #4CAF50; /* ボタンの背景色 */
+  border: none; /* ボーダーを削除 */
+  color: white; /* テキスト色 */
+  padding: 10px 20px; /* 内側の余白 */
+  text-align: center; /* テキストの位置 */
+  font-size: 16px; /* フォントサイズ */
+  border-radius: 5px; /* 角丸 */
+  cursor: pointer; /* カーソルの形状をポインタに変更 */
+  transition: background-color 0.3s, transform 0.2s; /* ホバー時のエフェクト */
+}
+
+  /* ボタンのホバーエフェクト */
+#goal-achieve-button:hover, #save-oxygen:hover, #save, #add-tip-btn:hover {
+  background-color: #45a149; /* ホバー時の色 */
+  transform: scale(1.05); /* 少し大きくする */
+}
+
+  /* ボタンをクリックしたときのエフェクト */
+#goal-achieve-button:active, #save-oxygen:active, #save, #add-tip-btn:active {
+  background-color: #39843c; /* アクティブ時の色 */
+  transform: scale(0.98); /* 少し縮小する */
+}
+
+    /* 戻るボタンのデザイン */
+    #backtop-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #4CAF50; /* 紫色の背景 */
+      color: white; /* 文字色は白 */
+      font-size: 16px;
+      text-decoration: none;
+      border-radius: 5px; /* 角を丸く */
+      transition: background-color 0.3s, transform 0.2s; /* ホバー時のアニメーション */
+    }
+
+    /* ホバー時のスタイル */
+    #backtop-button:hover {
+      background-color: #45a149; /* 少し濃い紫色 */
+      transform: scale(1.1); /* ボタンを少し大きく */
+    }
+
+    /* 中央揃え */
+    .center {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+        /* 戻るボタンのデザイン */
+        #back-button{
+          display: inline-block;
+          padding: 10px 20px;
+          background-color: #4c7aaf; /* 紫色の背景 */
+          color: white; /* 文字色は白 */
+          font-size: 16px;
+          text-decoration: none;
+          border-radius: 5px; /* 角を丸く */
+          transition: background-color 0.3s, transform 0.2s; /* ホバー時のアニメーション */
+        }
+    
+        /* ホバー時のスタイル */
+        #back-button:hover {
+          background-color: #457fa0; /* 少し濃い紫色 */
+          transform: scale(1.1); /* ボタンを少し大きく */
+        }
+    
+        /* 中央揃え */
+        .center {
+          text-align: center;
+          margin-top: 20px;
+        }
+
+    .category-btn {
+      display: flex;
+      flex-direction: column; /* 縦に並べる */
+      align-items: center; /* 中央に揃える */
+      justify-content: center;
+      margin-top: 50px; /* 上部にスペースを追加 */
+      padding: 15px 30px;
+      background-color: #4CAF50;  /* グラデーションカラー */
+      color: white;
+      border: none;
+      border-radius: 25px; /* 丸みを強調 */
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: bold;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08); /* 影の追加 */
+      transition: all 0.3s ease-in-out; /* アニメーション */
+      text-align: center;
+      margin: 10px 50px; /* ボタン同士の間隔を広げる */
+    }
+
+    .category-btn:hover {
+      background-color: #4CAF50; /* ホバー時にグラデーション逆転 */
+      transform: translateY(-4px); /* 少し上に浮く効果 */
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.08); /* ホバー時に影を強化 */
+    }
+
+    .category-btn.active {
+      background-color: #4CAF50; /* アクティブ時の色変更 */
+      transform: scale(1.05); /* アクティブ時に少し大きく */
+    }
