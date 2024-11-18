@@ -11,19 +11,14 @@
   width: 100%;
   margin: 1rem 0 0;
 }
-
-
-
-/* 入力フィールドの調整 */
-input, select {
-  width: 100%; /* 幅を親要素に合わせる */
+input {
+  width: 100%;
   box-sizing: border-box;
   margin: 1em 0;
-  padding: 1em; /* タップしやすい大きさ */
-  border-radius: 5px;
+  padding: .8em;
+  border-radius: 2em;
   border: 2px solid #aaa;
   font-weight: bold;
-  font-size: 1rem; /* フォントサイズを拡大 */
 }
 
 /*カレンダー*/
@@ -153,13 +148,7 @@ td.today {
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-
-/*変更部分*/
-  border-radius: 10px;
-  width: 90%; /* スマホ対応: モーダル幅を広げる */
-  max-width: 400px;
-  font-size: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 80%;
 }
 
 .close {
@@ -205,11 +194,6 @@ h5 {
   border-radius: 5px; /* 角丸 */
   cursor: pointer; /* カーソルの形状をポインタに変更 */
   transition: background-color 0.3s, transform 0.2s; /* ホバー時のエフェクト */
- 
-/*変更部分*/ 
-  width: 100%; /* ボタンを幅いっぱいにする */
-  margin-top: 10px;
-
 }
 
   /* ボタンのホバーエフェクト */
@@ -400,25 +384,5 @@ h5 {
       #backtop-button, #back-button {
         padding: 10px; /* ボタンサイズ調整 */
         font-size: 14px; /* フォントサイズ調整 */
-      }
-/*追加設定*/
-      .wrapper {
-        max-width: 100%;
-        padding: 0 10px;
-      }
-    
-      #header {
-        font-size: 20px;
-        margin: 1rem 0;
-      }
-    
-      input, select {
-        font-size: 1.2rem; /* フォントサイズを拡大 */
-        padding: 1.2em; /* タップしやすく */
-      }
-    
-      .modal-content {
-        padding: 20px;
-        font-size: 1.2rem;
       }
     }
