@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width">
   <title>喫煙管理カレンダー</title>
   <style>@import url(css/calender.css);</style>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f7f7f7; /* 背景色 */
+      color: #333;
+    }
+  </style>
 </head>
 
 <body>
@@ -12,12 +21,12 @@
     <a href="index.html" id="backtop-button">TOPに戻る</a>
   </div>
   <br>
-  
+  <h1>禁煙記録</h1>
   <h5>下の枠から目標設定ができます。１日ずつ達成できそうな簡単な目標を立てるのがおすすめです！</h5>
   <input type="text" id="goal-input" placeholder="今日の目標設定">
   <button id="goal-achieve-button">達成</button> 
   <p id="saved-goal"></p>
-  <a href="achieved-goals.html">達成した目標を見る</a>
+  <a href="achieved-goals.html">→達成した目標を見る</a>
   
   <script>
     // ページロード時にローカルストレージから目標を取得して表示
@@ -75,7 +84,7 @@
 
 <!-- モーダルの追加 -->
 <div id="modal" class="modal">
-    <div class="modal-content">
+  <div class="modal-content">
       <span class="close">&times;</span>
       <h2 id="modal-date"></h2>
       <label for="cigarettes">喫煙本数:</label>
@@ -84,22 +93,26 @@
       <input type="time" id="time">
       <label for="situation">状況:</label>
       <select id="situation">
-        <option value="朝起きてすぐ">朝起きてすぐ</option>
-        <option value="食事のあと">食事のあと</option>
-        <option value="飲酒時">飲酒時</option>
-        <option value="いらいら">いらいら</option>
-        <option value="口さみしい">口さみしい</option>
-        <option value="気分転換">気分転換</option>
-        <option value="その他">その他</option>
+          <option value="朝起きてすぐ">朝起きてすぐ</option>
+          <option value="食事のあと">食事のあと</option>
+          <option value="飲酒時">飲酒時</option>
+          <option value="いらいら">いらいら</option>
+          <option value="口さみしい">口さみしい</option>
+          <option value="気分転換">気分転換</option>
+          <option value="その他">その他</option>
       </select>
       <div id="other-situation-container" style="display: none;">
-        <label for="other-situation">その他の状況:</label>
-        <input type="text" id="other-situation">
+          <label for="other-situation">その他の状況:</label>
+          <input type="text" id="other-situation">
       </div>
       <button id="save">保存</button>
-    </div>
+      
+      <!-- 喫煙記録表示エリア -->
+      <div id="smoking-records"></div>
   </div>
-
+</div>
+<br>
+  <a href="list.html">→喫煙記録一覧をみる</a>
   <h5>カレンダーから入力した本数の合計が時間ごとの棒グラフで確認できます。どの時間帯によく喫煙しているのかがわかります。多い時間帯は意識して減らしてみましょう！</h5>
 <h2>喫煙本数のグラフ</h2>
 <canvas id="smoking-chart" width="600" height="400"></canvas>
