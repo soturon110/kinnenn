@@ -21,19 +21,18 @@
     }
 
     .container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 横2列のレイアウト */
+      gap: 20px; /* カード間の間隔 */
+      max-width: 900px; /* 最大幅を指定 */
+      margin: 20px auto; /* 中央揃え */
     }
 
     .card {
       background-color: white;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      margin: 15px;
       padding: 20px;
-      width: 300px;
       text-align: center;
       transition: transform 0.3s;
     }
@@ -61,109 +60,116 @@
       background-color: #45a049;
     }
 
-    #smoking-chart {
-      width: 100%;
-      height: 400px;
-      margin-top: 30px;
-    }
-
     footer {
       background-color: #333;
       color: white;
       text-align: center;
       padding: 10px;
-      position: absolute;
+      position: relative;
       width: 100%;
-      bottom: 0;
     }
+
 
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>禁煙支援アプリ</h1>
-    <p>このアプリでは、禁煙の目標を設定し、その達成を管理することができます。目標を入力することで、毎日の進捗を可視化し、継続する力をサポートします。禁煙生活を充実させ、健康な毎日を目指しましょう！</p>
-  </header>
+<header>
+  <h1>禁煙支援アプリ</h1>
+  <p>このアプリでは、禁煙の目標を設定し、その達成を管理することができます。目標を入力することで、毎日の進捗を可視化し、継続する力をサポートします。禁煙生活を充実させ、健康な毎日を目指しましょう！</p>
+</header>
 
-
-
-  <div class="container">
-    <!-- 入力ボタン -->
-    <div class="card">
-      <h2>禁煙記録</h2>
-      <p>禁煙記録を開始するには、以下のボタンをクリックしてください</p>
-      <a href="calender_1.html" class="btn">入力を始める</a>
-    </div>
-
-
-        <!-- 禁煙日数表示カード -->
-        <div class="card">
-          <h2>禁煙開始日</h2>
-          <p>禁煙を開始した日を入力してください。</p>
-          <input type="date" id="start-date-input" class="input-date" onchange="saveStartDate()" />
-          <h2>禁煙経過日数</h2>
-          <div id="congratulation">おめでとうございます！禁煙{days}日達成しました！</div>
-        </div>
-
-    <!-- 目標達成カード -->
-    <div class="card">
-      <h2>目標達成</h2>
-      <p>今までに達成した目標の一覧がみれます</p>
-      <a href="achieved-goals.html" class="btn">見る</a>
-    </div>
-
-         <!-- 対処法-->
-    <div class="container">
-        <div class="card">
-          <h2>対処法</h2>
-          <p>吸いたくなったときの対処法がわかります自分で追加することも可能です</p>
-          <a href="taisyohou.html" class="btn">見る</a>
-        </div>
-
-     <!-- ほめ-->
-    <div class="container">
-        <div class="card">
-          <h2>ほめいぬ</h2>
-          <p>誰かに褒めてほしくなったときにどうぞ</p>
-          <a href="homekinou.html" class="btn">褒められにいく</a>
-        </div>
+<div class="container">
+  <div class="card">
+    <h2>禁煙記録</h2>
+    <p>禁煙記録を開始するには、以下のボタンをクリックしてください</p>
+    <a href="calender_1.html" class="btn">入力を始める</a>
   </div>
-  <script>
-    // 禁煙開始日をローカルストレージに保存
-    function saveStartDate() {
-      const startDateInput = document.getElementById('start-date-input').value;
-      if (startDateInput) {
-        localStorage.setItem('startDate', startDateInput);
-        calculateDays();  // 入力後に日数を再計算
-      }
-    }
 
-    // 禁煙日数を計算して表示
-    function calculateDays() {
-      const today = new Date();
-      const startDateInput = localStorage.getItem('startDate');
-      const congratulationMessage = document.getElementById('congratulation');
+  <div class="card">
+    <h2>禁煙開始日</h2>
+    <p>禁煙を開始した日を入力してください。</p>
+    <input type="date" id="start-date-input" class="input-date" onchange="saveStartDate()" />
+    <h2>禁煙経過日数</h2>
+    <div id="congratulation">おめでとうございます！禁煙{days}日達成しました！</div>
+  </div>
 
-      if (startDateInput) {
-        const startDate = new Date(startDateInput);
-        const diffTime = today - startDate;  // ミリ秒単位で差分
-        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));  // 日数に変換
+  <div class="card">
+    <h2>目標達成</h2>
+    <p>今までに達成した目標の一覧がみれます</p>
+    <a href="achieved-goals.html" class="btn">見る</a>
+  </div>
 
-        // 結果を表示
-        if (diffDays >= 2   ) {  // 30日を達成した場合
-          congratulationMessage.style.display = "block";
-          congratulationMessage.textContent = `おめでとうございます！禁煙${diffDays}日達成しました！`;
-        } else {
-          congratulationMessage.style.display = "none";
-        }
-      }
-    }
+  <div class="card">
+    <h2>記録一覧</h2>
+    <p>記録した喫煙本数、時間、状況が確認できます</p>
+    <a href="list.html" class="btn">見る</a>
+  </div>
 
-    // ページが読み込まれた時に禁煙日数を計算
-    window.onload = function() {
+  <div class="card">
+    <h2>対処法</h2>
+    <p>吸いたくなったときの対処法がわかります。自分で追加することも可能です</p>
+    <a href="taisyohou.html" class="btn">見る</a>
+  </div>
+
+  <div class="card">
+    <h2>ほめいぬ</h2>
+    <p>誰かに褒めてほしくなったときにどうぞ</p>
+    <a href="homekinou.html" class="btn">褒められにいく</a>
+  </div>
+</div>
+
+<script>
+  function saveStartDate() {
+    const startDateInput = document.getElementById('start-date-input').value;
+    if (startDateInput) {
+      localStorage.setItem('startDate', startDateInput);
       calculateDays();
-    };
-  </script>
+    }
+  }
+
+  function calculateDays() {
+    const today = new Date();
+    const startDateInput = localStorage.getItem('startDate');
+    const congratulationMessage = document.getElementById('congratulation');
+
+    if (startDateInput) {
+      const startDate = new Date(startDateInput);
+      const diffTime = today - startDate;
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+      if (diffDays >= 2) {
+        congratulationMessage.style.display = "block";
+        congratulationMessage.textContent = `おめでとうございます！禁煙${diffDays}日達成しました！`;
+      } else {
+        congratulationMessage.style.display = "none";
+      }
+    }
+  }
+
+  window.onload = function () {
+    if (isLocalStorageAvailable()) {
+      calculateDays();
+    } else {
+      alert("ローカルストレージが使用できません。ブラウザの設定を確認してください。");
+    }
+  };
+
+  function isLocalStorageAvailable() {
+    try {
+      const testKey = 'test';
+      localStorage.setItem(testKey, 'testValue');
+      localStorage.removeItem(testKey);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+</script>
+
+<footer>
+  <p>© 2024 禁煙支援アプリ</p>
+</footer>
+
 </body>
 </html>
