@@ -1,0 +1,191 @@
+<!DOCTYPE html> 
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>@import url(css/calender.css);</style>
+    <title>喫煙記録一覧</title>
+    <style>
+        /* 基本スタイル */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7; /* 背景色 */
+            color: #333;
+        }
+
+
+        /* 日付ナビゲーション */
+        .date-navigation {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+
+        .date-navigation button {
+            width: 48%; /* ボタンを横並びで半分にする */
+            cursor: pointer;
+            background: #5570aa;
+            color: #fff;
+            border: 1px solid #5570aa;
+            border-radius: 4px;
+            font-size: 1rem;
+            padding: 0.5rem 2rem;
+            margin: 1rem 0;
+        }
+
+        .date-navigation button:hover {
+            background-color: #959ecf;
+            border-color: #959ecf;
+        }
+
+        .date-navigation .active {
+            font-weight: bold;
+            color: #666;
+        }
+
+        /* テーブルのデザイン */
+        table {
+            width: 90%;
+            margin: 10px auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 影を追加 */
+        }
+
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border: 1px solid #ddd;
+            font-size: 1.2rem;
+        }
+
+        th {
+            background-color: #565856;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        td {
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover td {
+            background-color: #f1f1f1; /* ホバー時のハイライト */
+        }
+
+        /* リンクボタン */
+        .center {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        a {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 10px;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>喫煙記録一覧</h1>
+
+    <!-- 日付のナビゲーション -->
+    <div class="date-navigation">
+        <span id="current-date" class="active"></span>
+        <br>
+        <button id="prev-date">＜</button>
+        <button id="next-date">＞</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>🚬 本数</th>
+                <th>🕒 時間</th>
+                <th>🌟 状況</th>
+            </tr>
+        </thead>
+        <tbody id="records-table">
+            <!-- データが動的に挿入されます -->
+        </tbody>
+    </table>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const recordsTable = document.getElementById("records-table");
+            const currentDateElement = document.getElementById("current-date");
+            const prevDateButton = document.getElementById("prev-date");
+            const nextDateButton = document.getElementById("next-date");
+
+            const dataStore = JSON.parse(localStorage.getItem("dataStore")) || {};
+            const dates = Object.keys(dataStore).sort(); // 日付を昇順にソート
+
+            let currentIndex = 0; // 初期表示する日付のインデックス
+
+            // 日付表示とデータを更新
+            function updateRecords(dateIndex) {
+                const date = dates[dateIndex];
+                currentDateElement.textContent = date;
+
+                // 表をクリア
+                recordsTable.innerHTML = "";
+
+                // 日付に該当するデータを表示
+                dataStore[date].forEach(entry => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>🚬 ${entry.cigarettes} 本</td>
+                        <td>🕒 ${entry.time}</td>
+                        <td>🌟 ${entry.situation}</td>
+                    `;
+                    recordsTable.appendChild(row);
+                });
+
+                // 前後の日付ボタンを有効化・無効化
+                prevDateButton.disabled = currentIndex === 0;
+                nextDateButton.disabled = currentIndex === dates.length - 1;
+            }
+
+            // 初期表示
+            updateRecords(currentIndex);
+
+            // 前の日付のデータ表示
+            prevDateButton.addEventListener("click", function() {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateRecords(currentIndex);
+                }
+            });
+
+            // 次の日付のデータ表示
+            nextDateButton.addEventListener("click", function() {
+                if (currentIndex < dates.length - 1) {
+                    currentIndex++;
+                    updateRecords(currentIndex);
+                }
+            });
+        });
+    </script>
+
+    <div class="center">
+        <a href="index.html" id="backtop-button">TOPに戻る</a>
+        <a href="calender_1.html" id="back-button">禁煙記録に戻る</a>
+    </div>
+</body>
+</html>
