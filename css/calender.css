@@ -1,5 +1,13 @@
 @charset "utf-8";@charset "utf-8";
 /*全体*/
+.body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f7f7f7; /* 背景色 */
+  color: #333;
+}
+
 .wrapper{
   max-width: 600px;
   margin: 0 auto;
@@ -21,6 +29,31 @@ input {
   font-weight: bold;
 }
 
+/* リンク　達成した目標　喫煙記録一覧 */
+a {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #82cca3; /* 背景色 */
+  color: white;  /* 文字色 */
+  font-size: 16px;
+  text-decoration: none;  /* 下線を消す */
+  border-radius: 5px;  /* 角を丸くする */
+  transition: background-color 0.3s, transform 0.3s; /* アニメーション */
+  text-align: center;
+}
+
+/* ホバー時の効果 */
+a:hover {
+  background-color: #2f8d59; /* 背景色を少し濃く */
+  transform: translateY(-2px); /* 少し上にスライド */
+}
+
+/* フォーカス時の効果 */
+a:focus {
+  outline: none; /* フォーカス時のアウトラインを消す */
+  background-color: #2f8d59; /* 背景色をホバーと同じに */
+  transform: translateY(-2px); /* 少し上にスライド */
+}
 /*カレンダー*/
 #calendar {
   text-align: center;
@@ -52,11 +85,13 @@ td:last-child {
 td.disabled {
   color: #ccc;
 }
-/*本日*/
-td.today {
-  background-color: #D65E72;
-  color: #fff;
+/* 当日のセルのスタイル */
+.today {
+  background-color: #e0f5eb;  
+  color: #666;
+  font-weight: bold;
 }
+
 
 /*ボタン*/
 #next-prev-button {
@@ -172,6 +207,13 @@ td.today {
 
 #oxygen-chart {
   margin-top: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 30px;
+  color: #5a5a5a;
+  font-size: 2em;
 }
 
 h2 {

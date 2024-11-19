@@ -53,29 +53,20 @@ function createProcess(year, month) {
             } else {
                 count++;
                 var fullDate = year + "-" + (month + 1) + "-" + count;
-                calendar += `<td class='calendar_td' data-date='${fullDate}'>${count}`;
-                
-                // データが存在する場合にリストを追加
+
+                // 今日の日付と一致するかをチェック
+                var isToday = (fullDate === today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate()) ? ' today' : '';
+
+                // 喫煙本数の合計を取得
+                let totalCigarettes = 0;
                 if (dataStore[fullDate]) {
-                    calendar += "<ul class='entry-list'>";
-                    dataStore[fullDate].forEach((entry, index) => {
-                        calendar += `
-                            <li class="smoking-entry">
-                                <div class="entry-details">
-                                    <span class="icon">🚬</span> <strong>${entry.cigarettes}</strong>本 
-                                </div>
-                                <div class="entry-details">
-                                    <span class="icon">🕒</span> <strong>${entry.time}</strong>
-                                </div>
-                                <div class="entry-details">
-                                    <span class="icon">🌟</span> ${entry.situation}
-                                </div>
-                                <button class="delete-btn" data-date="${fullDate}" data-index="${index}">削除</button>
-                            </li>`;
-                    });
-                    calendar += "</ul>";  // <ul>タグをforEachの外側に配置
+                    totalCigarettes = dataStore[fullDate].reduce((sum, entry) => sum + parseInt(entry.cigarettes), 0);
                 }
-                
+
+                calendar += `<td class='calendar_td${isToday}' data-date='${fullDate}'>${count}`;
+                if (totalCigarettes > 0) {
+                    calendar += `<div class='total-cigarettes'>合計: ${totalCigarettes}本</div>`;
+                }
                 calendar += "</td>";
             }
         }
@@ -96,6 +87,7 @@ window.onclick = function(event) {
     }
 };
 
+// モーダル内に保存されている記録を表示
 document.addEventListener("click", function(e) {
     if (e.target.classList.contains("calendar_td")) {
         var selectedDate = e.target.dataset.date;
@@ -105,10 +97,14 @@ document.addEventListener("click", function(e) {
         // フォームをリセット
         document.getElementById("cigarettes").value = "";
         document.getElementById("time").value = "";
-        document.getElementById("situation").value = "朝起きてすぐ";  // デフォルト選択肢を設定
+        document.getElementById("situation").value = "朝起きてすぐ";
         document.getElementById("other-situation").value = "";
         document.getElementById("other-situation-container").style.display = "none";
 
+        // その日の記録を表示
+        displaySmokingRecords(selectedDate);
+
+        // 状況が「その他」の場合の処理
         document.getElementById("situation").onchange = function() {
             if (this.value === "その他") {
                 document.getElementById("other-situation-container").style.display = "block";
@@ -117,6 +113,7 @@ document.addEventListener("click", function(e) {
             }
         };
 
+        // 保存ボタンの処理
         document.getElementById("save").onclick = function() {
             var cigarettes = document.getElementById("cigarettes").value;
             var time = document.getElementById("time").value;
@@ -138,10 +135,33 @@ document.addEventListener("click", function(e) {
             modal.style.display = "none";
             showProcess(showDate);  // カレンダーを再描画
         };
-        
     }
+});
 
-    // 削除ボタンの処理
+// 喫煙記録をモーダルに表示
+function displaySmokingRecords(date) {
+    var recordContainer = document.getElementById("smoking-records");
+    recordContainer.innerHTML = "";  // 表示エリアをクリア
+
+    if (dataStore[date]) {
+        dataStore[date].forEach(function(record, index) {
+            var recordDiv = document.createElement("div");
+            recordDiv.classList.add("record-item");
+            recordDiv.innerHTML = `
+                <p>喫煙本数: ${record.cigarettes}本</p>
+                <p>時間: ${record.time}</p>
+                <p>状況: ${record.situation}</p>
+                <button class="delete-btn" data-date="${date}" data-index="${index}">削除</button>
+            `;
+            recordContainer.appendChild(recordDiv);
+        });
+    } else {
+        recordContainer.innerHTML = "<p>記録はありません。</p>";
+    }
+}
+
+// 削除ボタンの処理
+document.addEventListener("click", function(e) {
     if (e.target.classList.contains("delete-btn")) {
         var date = e.target.dataset.date;
         var index = e.target.dataset.index;
@@ -153,6 +173,12 @@ document.addEventListener("click", function(e) {
         if (dataStore[date].length === 0) {
             delete dataStore[date];
         }
+
+        // 喫煙記録を再表示
+        displaySmokingRecords(date);
+
+        // データ保存
+        saveData();
 
         showProcess(showDate);  // カレンダーを再描画
     }
